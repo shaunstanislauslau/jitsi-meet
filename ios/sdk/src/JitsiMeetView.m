@@ -315,6 +315,16 @@ static NSMapTable<NSString *, JitsiMeetView *> *views;
     [self loadURLObject:urlString ? @{ @"url": urlString } : nil];
 }
 
+/**
+ * Sends an evcent to the JavaScript side which indicates if PiP mode is enabled
+ * or not. When set, the application will adjust for it by disabling toolbars
+ * and so on. See the react/features/mobile/picture-in-picture.
+ */
+- (void)onPictureInPictureModeChanged:(BOOL)isInPictureInPictureMode {
+    [bridgeWrapper sendEventWithName:@"pictureInPictureModeChanged"
+                                body:@{@"isInPictureInPictureMode": @(isInPictureInPictureMode)}];
+}
+
 #pragma mark Private methods
 
 /**

@@ -45,4 +45,6 @@
 
 - (void)loadURLString:(NSString * _Nullable)urlString;
 
+- (void)onPictureInPictureModeChanged:(BOOL)isInPictureInPictureMode;
+
 @end

@@ -23,6 +23,7 @@ import {
 } from '../../base/media';
 import { Container } from '../../base/react';
 import { ColorPalette } from '../../base/styles';
+import { requestPipMode } from '../../mobile/picture-in-picture';
 import { beginRoomLockRequest } from '../../room-lock';
 import { beginShareRoom } from '../../share-room';
 
@@ -74,6 +75,11 @@ class Toolbox extends Component {
          * Handler for hangup.
          */
         _onHangup: PropTypes.func,
+
+        /**
+         * Requests Picture-in-Picture mode.
+         */
+        _onPipRequest: PropTypes.func,
 
         /**
          * Sets the lock i.e. password protection of the conference/room.
@@ -296,6 +302,12 @@ class Toolbox extends Component {
             <View
                 key = 'secondaryToolbar'
                 style = { styles.secondaryToolbar }>
+                <ToolbarButton
+                    iconName = { 'menu-down' }
+                    iconStyle = { iconStyle }
+                    onClick = { this.props._onPipRequest }
+                    style = { style }
+                    underlayColor = { underlayColor } />
                 {
                     AudioRouteButton
                         && <AudioRouteButton
@@ -381,6 +393,17 @@ Object.assign(Toolbox.prototype, {
 function _mapDispatchToProps(dispatch) {
     return {
         ...abstractMapDispatchToProps(dispatch),
+
+        /**
+         * Requests Picture-in-Picture mode.
+         *
+         * @private
+         * @returns {void}
+         * @type {Function}
+         */
+        _onPipRequest() {
+            dispatch(requestPipMode());
+        },
 
         /**
          * Sets the lock i.e. password protection of the conference/room.

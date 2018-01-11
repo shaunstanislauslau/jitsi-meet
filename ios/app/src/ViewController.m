@@ -68,6 +68,10 @@ void _onJitsiMeetViewDelegateEvent(NSString *name, NSDictionary *data) {
     _onJitsiMeetViewDelegateEvent(@"LOAD_CONFIG_ERROR", data);
 }
 
+- (void)requestPipMode:(NSDictionary *)data {
+    _onJitsiMeetViewDelegateEvent(@"REQUEST_PIP_MODE", data);
+}
+
 #endif
 
 @end
